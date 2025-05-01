@@ -3,7 +3,7 @@ import React from 'react';
 import Hero from '@/components/Hero';
 import FeatureCard from '@/components/FeatureCard';
 import ContentCard from '@/components/ContentCard';
-import { Wheat, Plant, Bug, Sprout } from 'lucide-react';
+import { Wheat, Flower2, Bug, Sprout } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
@@ -20,7 +20,7 @@ const Index = () => {
     {
       title: 'Crop Information',
       description: 'Detailed information on crop varieties, growth requirements, nutritional values, and harvesting techniques.',
-      icon: Plant,
+      icon: Flower2,
       link: '/crops'
     },
     {

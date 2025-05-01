@@ -35,7 +35,7 @@ const Contact = () => {
   const handleAttachment = (e) => {
     setFormData(prev => ({
       ...prev,
-      attachment: e.target.files[0]
+      attachment: e.target.files?.[0] || null
     }));
   };
 
@@ -60,7 +60,7 @@ const Contact = () => {
       });
       
       // Reset file input
-      const fileInput = document.getElementById('attachment');
+      const fileInput = document.getElementById('attachment') as HTMLInputElement;
       if (fileInput) fileInput.value = '';
     }, 1500);
   };
