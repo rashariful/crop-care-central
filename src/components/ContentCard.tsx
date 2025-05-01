@@ -14,11 +14,12 @@ interface ContentCardProps {
 const ContentCard = ({ title, description, image, link, category }: ContentCardProps) => {
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100 flex flex-col h-full">
-      <div className="h-48 overflow-hidden">
+      <div className="h-56 overflow-hidden">
         <img 
           src={image} 
           alt={title} 
           className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
+          loading="lazy"
         />
       </div>
       <div className="p-5 flex flex-col flex-grow">

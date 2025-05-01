@@ -15,12 +15,13 @@ const Hero = ({
   title, 
   subtitle, 
   showButton = true, 
-  backgroundImage = '/images/farm-field.jpg' 
+  backgroundImage = 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&q=80' 
 }: HeroProps) => {
   const heroStyle = {
-    background: `linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)), url(${backgroundImage})`,
+    background: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6)), url(${backgroundImage})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    padding: '4rem 0',
   };
 
   return (

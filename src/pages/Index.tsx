@@ -79,7 +79,7 @@ const Index = () => {
     }, 1500);
   };
 
-  // Keep existing features array
+  // Updated features array with real images
   const features = [
     {
       title: 'Farming Guides',
@@ -107,26 +107,26 @@ const Index = () => {
     }
   ];
 
-  // Keep existing featuredGuides array
+  // Updated featuredGuides array with real images from Unsplash
   const featuredGuides = [
     {
       title: 'Organic Farming Basics',
       description: 'Learn the fundamental principles and practices of organic farming to grow healthy crops without synthetic chemicals.',
-      image: '/images/organic-farming.jpg',
+      image: 'https://images.unsplash.com/photo-1466721591366-2d5fba72006d?auto=format&fit=crop&q=80',
       link: '/farming-guides/organic-basics',
       category: 'Sustainable Farming'
     },
     {
       title: 'Water Conservation Techniques',
       description: 'Discover effective strategies to conserve water in your farm while maintaining optimal crop growth and yield.',
-      image: '/images/water-conservation.jpg',
+      image: 'https://images.unsplash.com/photo-1493962853295-0fd70327578a?auto=format&fit=crop&q=80',
       link: '/farming-guides/water-conservation',
       category: 'Resource Management'
     },
     {
       title: 'Soil Health Management',
       description: 'Understand the importance of soil health and learn techniques to maintain and improve soil fertility for sustainable farming.',
-      image: '/images/soil-health.jpg',
+      image: 'https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?auto=format&fit=crop&q=80',
       link: '/farming-guides/soil-health',
       category: 'Soil Management'
     }
