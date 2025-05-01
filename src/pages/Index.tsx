@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Hero from '@/components/Hero';
 import FeatureCard from '@/components/FeatureCard';
@@ -8,8 +7,79 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useToast } from '@/components/ui/use-toast';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent } from '@/components/ui/card';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const Index = () => {
+  const { toast } = useToast();
+  const [formData, setFormData] = React.useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    attachment: null
+  });
+  
+  const [loading, setLoading] = React.useState(false);
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+  
+  const handleSelectChange = (value) => {
+    setFormData(prev => ({
+      ...prev,
+      subject: value
+    }));
+  };
+
+  const handleAttachment = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      attachment: e.target.files?.[0] || null
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    // Simulate form submission
+    setTimeout(() => {
+      toast({
+        title: "Message Sent Successfully",
+        description: "Thank you for reaching out. We'll get back to you soon.",
+      });
+      setLoading(false);
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+        attachment: null
+      });
+      
+      // Reset file input
+      const fileInput = document.getElementById('contact-attachment') as HTMLInputElement;
+      if (fileInput) fileInput.value = '';
+    }, 1500);
+  };
+
+  // Keep existing features array
   const features = [
     {
       title: 'Farming Guides',
@@ -37,6 +107,7 @@ const Index = () => {
     }
   ];
 
+  // Keep existing featuredGuides array
   const featuredGuides = [
     {
       title: 'Organic Farming Basics',
@@ -110,6 +181,94 @@ const Index = () => {
                   category={guide.category}
                 />
               ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Contact Section */}
+        <section id="contact" className="py-12 md:py-20 bg-agri-cream">
+          <div className="container mx-auto px-4">
+            <h2 className="section-title mb-10">Contact Us</h2>
+            <div className="max-w-3xl mx-auto">
+              <Card>
+                <CardContent className="p-6">
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Your Name <span className="text-red-500">*</span></Label>
+                        <Input 
+                          id="name" 
+                          name="name" 
+                          value={formData.name} 
+                          onChange={handleChange} 
+                          required 
+                          placeholder="John Doe"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Your Email <span className="text-red-500">*</span></Label>
+                        <Input 
+                          id="email" 
+                          name="email" 
+                          type="email" 
+                          value={formData.email} 
+                          onChange={handleChange} 
+                          required 
+                          placeholder="john.doe@example.com"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="subject">Subject <span className="text-red-500">*</span></Label>
+                      <Select 
+                        value={formData.subject} 
+                        onValueChange={handleSelectChange}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a subject" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="general">General Inquiry</SelectItem>
+                          <SelectItem value="farming">Farming Advice</SelectItem>
+                          <SelectItem value="pest">Pest Control</SelectItem>
+                          <SelectItem value="crops">Crop Information</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="message">Your Message <span className="text-red-500">*</span></Label>
+                      <Textarea 
+                        id="message" 
+                        name="message" 
+                        value={formData.message} 
+                        onChange={handleChange} 
+                        required 
+                        placeholder="How can we help you?"
+                        rows={5}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="contact-attachment">Attachment (optional)</Label>
+                      <Input 
+                        id="contact-attachment" 
+                        name="attachment" 
+                        type="file" 
+                        onChange={handleAttachment} 
+                        className="cursor-pointer"
+                      />
+                      <p className="text-xs text-gray-500">Upload images of issues or documents you'd like to share (Max file size: 5MB)</p>
+                    </div>
+
+                    <Button type="submit" className="agri-btn w-full" disabled={loading}>
+                      {loading ? "Sending..." : "Send Message"}
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>

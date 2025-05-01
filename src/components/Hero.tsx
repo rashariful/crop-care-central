@@ -8,11 +8,23 @@ interface HeroProps {
   title: string;
   subtitle: string;
   showButton?: boolean;
+  backgroundImage?: string;
 }
 
-const Hero = ({ title, subtitle, showButton = true }: HeroProps) => {
+const Hero = ({ 
+  title, 
+  subtitle, 
+  showButton = true, 
+  backgroundImage = '/images/farm-field.jpg' 
+}: HeroProps) => {
+  const heroStyle = {
+    background: `linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)), url(${backgroundImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  };
+
   return (
-    <div className="hero-section">
+    <div className="hero-section" style={heroStyle}>
       <div className="container mx-auto px-4 text-center z-10">
         <div className="flex justify-center mb-6">
           <Sprout className="h-16 w-16 text-agri-green" />
